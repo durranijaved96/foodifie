@@ -1,0 +1,250 @@
+{
+  "header": {
+    "language-switcher-label-de": "Deutsch",
+    "language-switcher-label-en": "English",
+    "upgrade-button-label": "Upgrade now!",
+    "header-plan-label": "Current plan",
+    "header-plan-days-left": "Days left",
+    "header-plan-expired": "Subscription expired!",
+    "header-plan-expired-text": "'Read only' mode is activated now",
+    "header-dialog-trial-expired":  "Trial period expired!",
+    "header-dialog-trial-text": "Your trial period is over, your account is currently in read-only mode.",
+    "discount-label": "Upgrade now and save 30% with code STARTER30",
+    "subscription-expired-dialog": "Subscription has expired!",
+    "subscription-expired-text": "Your account is currently in read-only mode. If you want to edit your projects again, please upgrade.",
+    "subscription-expired-button": "Close"
+  },
+  "dashboard": {
+    "title": "Project",
+    "nav-title": "Project list",
+    "btn-project-create": "New Project",
+    "btn-prtoject-edit": "Edit",
+    "btn-project-delete": "Delete",
+    "btn-project-clear": "Clear",
+    "dialog-delete-project": "Are you sure you want to delete?",
+    "dialog-delete-proceed": "If yes, then proceed with the deletion.",
+    "dialog-delete-title": "Delete Project!",
+    "dialog-delete-btn-cancel": "Cancel",
+    "dialog-delete-btn-delete": "Delete",
+    "project-name": "Project name",
+    "client": "Client",
+    "no-data": "No Data",
+    "created-at": "Created at",
+    "updated-at": "Last update",
+    "status": "Status",
+    "dense": "Dense",
+    "all": "All",
+        "done": "Done",
+        "in-progress": "In Progress",
+        "draft": "Draft",
+    "projectlist": {
+      "tabs": {
+        "all": "All",
+        "done": "Done",
+        "in-progress": "In Progress",
+        "draft": "Draft"
+      },
+      "search-bar": {
+        "hint": "Search projects by filters",
+        "label-search-results": "result(s) found"
+      },
+      "table-row": {
+        "link-project-details": "Project details",
+        "btn-prtoject-edit": "Edit",
+        "btn-project-delete": "Delete",
+        "label-status-done": "Done",
+        "label-status-in-progress": "In Progress",
+        "label-status-draft": "Draft"
+      }
+    }
+  },
+  "subscription": {
+    "page-title": "Subscription",
+    "tabs-label-monthly": "Monthly",
+    "license": "License",
+    "tabs-label-yearly": "Yearly",
+    "icon-label": "Save 2 months",
+    "btn-cancel-dialog": "Confirm Cancellation?",
+    "cancellation-dialog-text": "Are you sure you want to cancel the active subscription?",
+    "cancellation-dialog-subtext": "If yes, then proceed with the cancellation.",
+    "btn-resubscribe-dialog": "Confirm Resubscribtion?",
+    "resubscribe-dialog-text": "Are you sure you want to resubscribe?",
+    "resubscribe-dialog-subtext": "If yes, then proceed with the resubscription.",
+    "btn-resubscription": "Proceed to resubscription",
+    "btn-cancel": "Proceed to cancellation",
+    "btn-cancel-back": "Cancel",
+    "snackbar-success": "Subscription cancelled successfully!",
+    "snackbar-error": "Your subscription is already cancelled.",
+    "btn-upgrade": "Upgrade now!",
+    "btn-cancel-subscription": "Cancel subscription",
+    "btn-enterprise-subscription": "Contact Sales",
+    "btn-renew-subscription": "Resubscribe",
+    "btn-trial-expired": "Trial period expired",
+    "btn-trial-active": "Trial period activated",
+    "btn-not-available": "Not available",
+    "label-current-plan": "Current",
+    "text-monthly": "All prices per user / month, excluding VAT.",
+    "text-yearly": "All prices per user / year, excluding VAT.",
+    "enterprise-text-contact":  "Please contact us!",
+    "test-card": "Free trial",
+    "free-trial-card": {
+      "name": "Free trial",
+        "first": "1 project",
+        "second": "50 priorised optimisations/mth.",
+        "third": "3 saved configurations",
+      "options": {
+        "first": "Community support",
+        "second": "14 days Trial version",
+        "third": "No credit card required"
+      }
+    },
+    "essential-card": {
+      "license-name": "Essential",
+      "commons": {
+        "first": "5 projects",
+        "second": "200 priorised optimisations/mth.",
+        "third": "5 saved configurations"
+      },
+      "options": {
+        "first": "Email support",
+        "second": "Project comparison",
+        "third": "Viewing shared projects"
+      }
+    },
+    "enterprise-card": {
+      "license-name": "Enterprise",
+      "commons": {
+        "first": "Unlimited projects",
+        "second": "2.000 priorised optimisations/mth/user.",
+        "third": "100 saved configurations"
+      },
+      "options": {
+        "first": "Prioritised Email support",
+        "second": "Project comparison",
+        "third": "Viewing & editing shared projects",
+        "fourth": "Shared assets"
+      }
+    }
+  },
+  "sidebar": {
+    "overview": "Overview",
+    "projects": "Projects",
+    "subscription": "Subscription",
+    "imprint": "Imprint",
+    "privacy-policy": "Privacy Policy"
+  },
+  "signin": {
+    "signin-page": "Sign in to Dashboard",
+    "create-account": "New user?",
+    "account-link": "Create an account",
+    "t-c": "T&C",
+    "dpa": "DPA",
+    "privacy-policy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
+  "signin-form": {
+    "signin-email": "Email Address",
+    "signin-password": "Password",
+    "signin-button": "Login",
+    "forgot-password": "Forgot password?",
+    "email-error": "Enter a valid email address",
+    "emai-required": "Email is required",
+    "password-required": "Password is required",
+
+    "signin-error": {
+      "email-error": "Enter a valid email address",
+      "password-error": "Password is required",
+      "login-email-error": "Incorrect email",
+      "login-password-error": "Incorrect password"
+    }
+  },
+  "signup": {
+    "signup-page-title": "Start your 14-days trial now!",
+    "sub-text": "Already have an account?",
+    "login-link": "Login",
+    "terms-of-use": "Terms of Use",
+    "privacy-policy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
+  "signup-form": {
+    "signup-email": "Email Address",
+    "signup-password": "Password",
+    "signup-button": "Create account",
+    "t-c": "T&C,",
+    "dpa": "DPA",
+    "t-c-link": "terms-and-conditions",
+    "dpa-link": "data-processing-agreement",
+    "privacy-policy-link": "privacy-policy",
+    "checkbox-text": "By signing up, I agree to the",
+    "checkbox-text-3": "and",
+    "checkbox-text-4": ".",
+    "password-hint": "Your password must be at least 8 characters long. Use a combination of uppercase and lowercase letters, numbers, and special characters to enhance security.",
+    "privacy-policy": "Privacy Policy",
+    "signup-dialog-title": "Check your email inbox!",
+    "signup-dialog-text": "Please check your email inbox for further instructions. In case you don't see any mail, kindly check your spam or junk folder.",
+    "signup-dialog-link": "Return to sign up",
+    "signup-error": {
+      "signup-email-error": "Enter a valid email address",
+      "signup-password-error": "Email is required",
+      "fieldname-error": "is required",
+      "checkbox-error": "Select the checkbox in order to sign up."
+    }
+  },
+  "reset-password-page": {
+    "reset-password-page-title": "Forgot your password?"
+  },
+  "reset-password-form": {
+    "reset-password-text": "Please enter the email address associated with your account, and we'll email you a link to reset your password.",
+    "reset-password-email": "Email Address",
+    "reset-password-button": "Send request",
+    "reset-password-link-text": "Return to sign in"
+  },
+  "new-password-page": {
+    "new-password-page-title": "Please enter a new password"
+  },
+  "new-password-form": {
+    "new-password-place-holder": "New password",
+    "confirm-password": "Confirm password",
+    "new-password-button": "Update Password"
+  },
+  "reset-password-dialog": {
+    "reset-password-dialog-title": "Check your email inbox!",
+    "reset-password-dialog-text": "Please check your email inbox for further instructions. In case you don't see any mail, kindly check your spam or junk folder. Also ensure that the provided email is correct and is connected to an account.",
+    "reset-password-dialog-link": "Try again",
+    "reset-password-dialog-body": "Didn't receive a mail?",
+    "reset-password-dialog-link-text": "Return to sign up"
+  },
+  "new-password-dialog": {
+    "new-password-dialog-title": "Password updated",
+    "new-password-dialog-text": "Your password has been successfully updated. Your account is now secured with the new credentials. Thank you for keeping your account safe!",
+    "new-password-button": "Go to Sign in page"
+  },
+  "success-page": {
+    "success-page-title": "Congratulations on your purchase!",
+    "terms-of-use": "Terms of Use",
+    "privacy-policy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
+  "success-message": {
+    "success-page-text": "Your transaction was successful. Enjoy the features of your new subscription!",
+    "success-page-button": "Go to Dashboard"
+  },
+  "cancel-layout": {
+    "cancel-page-title": "Your payment failed ",
+    "terms-of-use": "Terms of Use",
+    "privacy-policy": "Privacy Policy",
+    "imprint": "Imprint"
+  },
+  "cancel-message": {
+    "cancel-page-text": "There was a problem processing your payment.<br/>Please try again or contact support.",
+    "cancel-page-button-pay-again": "Pay Again",
+    "cancel-page-button-contact-support": "Contact Sales"
+  },
+  "account": {
+    "account-title": "Account",
+    "privacy-policy": "Privacy Policy",
+    "imprint": "Imprint",
+    "logout": "Logout"
+  }
+  
+}

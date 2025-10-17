@@ -1,0 +1,255 @@
+{
+  "header": {
+    "language-switcher-label-de": "Deutsch",
+    "language-switcher-label-en": "English",
+    "upgrade-button-label": "Jetzt upgraden!",
+    "header-plan-label": "Aktueller Plan",
+    "header-plan-days-left": "Tage verbleibend",
+    "header-plan-expired": "Dein Abonnement ist abgelaufen! ",
+    "header-plan-expired-text": " Alle Projekte werden jetzt nur noch im 'read-only' Modus angezeigt.",
+    "header-dialog-trial-expired": "Testphase abgelaufen!",
+    "header-dialog-trial-text": "Ihr Testzeitraum ist abgelaufen, Ihr Konto ist derzeit schreibgeschützt Modus.",
+    "discount-label": "Jetzt upgraden und 30% sparen mit dem Code STARTER30",
+    "subscription-expired-dialog": "Abonnement abgelaufen!",
+    "subscription-expired-text": "Deine Projekte werden aktuell im “read-only” Modus angezeigt. Um weitere Änderungen an den Projekten vornehmen zu können, schließe bitte ein Abonnement ab.",
+    "subscription-expired-button": "Schließen"
+  },
+  "dashboard": {
+    "title": "Projekte",
+    "nav-title": "Projektliste",
+    "btn-project-create": "Neues Projekt",
+    "btn-prtoject-edit": "Bearbeiten",
+    "btn-project-delete": "Löschen",
+    "btn-project-clear": "Löschen",
+    "dialog-delete-project": "Möchten Sie wirklich löschen?",
+    "dialog-delete-proceed": "Wenn ja, fahren Sie mit dem Löschen fort.",
+    "dialog-delete-title": "Projekt löschen!",
+    "dialog-delete-btn-cancel": "Abbrechen",
+    "dialog-delete-btn-delete": "Löschen",
+    "project-name": "Projektname",
+    "client": "Kunde",
+    "all": "Alle",
+    "done": "Abgeschlossen",
+    "in-progress": "In Bearbeitung",
+    "draft": "Entwürfe",
+    "no-data": "Keine Daten verfügbar",
+    "created-at": "Erstellt am",
+    "updated-at": "Zuletzt aktualisiert",
+    "status": "Status",
+    "dense": "Dicht",
+        "projectlist": {
+      "tabs": {
+        "all": "Alle",
+        "done": "Abgeschlossen",
+        "in-progress": "In Bearbeitung",
+        "draft": "Entwürfe"
+      },
+      "search-bar": {
+        "hint": "Suche nach Projektname, Kunde ...",
+        "label-search-results": "Ergebnis(se) gefunden"
+      },
+      "table-row": {
+        "link-project-details": "Details",
+        "btn-project-edit": "Bearbeiten",
+        "btn-project-delete": "Löschen",
+        "label-status-done": "Abgeschlossen",
+        "label-status-in-progress": "In Bearbeitung",
+        "label-status-draft": "Entwurf"
+      }
+    }
+  },
+  "subscription": {
+    "page-title": "Abonnement",
+    "tabs-label-monthly": "Monatlich",
+    "license": "Lizenz",
+    "tabs-label-yearly": "Jährlich",
+    "icon-label": "Spare 2 Monate",
+    "btn-resubscribe-dialog": "Neuanmeldung bestätigen?",
+    "resubscribe-dialog-text": "Sind Sie sicher, dass Sie sich erneut anmelden möchten?",
+    "resubscribe-dialog-subtext": "Wenn ja, fahren Sie mit der erneuten Anmeldung fort.",
+    "btn-resubscription": "Fahren Sie mit der erneuten Anmeldung fort",
+    "btn-cancel-dialog": "Abonnement kündigen?",
+    "cancellation-dialog-text": "Möchtest du das laufende Abonnement wirklich kündigen?",
+    "cancellation-dialog-subtext": "Wenn ja, fahren Sie mit der Stornierung fort.",
+    "btn-cancel": "Abonnement Kündigen",
+    "btn-cancel-back": "Abbrechen",
+    "snackbar-success": "Das Abonnement wurde erfolgreich gekündigt!",
+    "snackbar-error": "Dein Abonnement wurde bereits gekündigt.",
+    "btn-upgrade": "Jetzt Upgraden!",
+    "btn-cancel-subscription": "Abonnement Kündigen",
+    "btn-enterprise-subscription": "Sales Kontaktieren",
+    "btn-renew-subscription": "Erneut Abonnieren",
+    "btn-trial-expired": "Testphase ist abgelaufen",
+    "btn-trial-active": "Testphase aktiv",
+    "btn-not-available": "Nicht verfügbar",
+    "label-current-plan": "Aktuelle Auswahl",
+    "text-monthly": "Alle Preise pro Benutzer / Monat, zzgl. MwSt.",
+    "text-yearly": "Alle Preise pro Benutzer / Jahr, zzgl. MwSt.",
+    "enterprise-text-contact": "Kontaktieren uns!",
+    "test-card": "Kostenlose Testversion",
+    "free-trial-card": {
+      "name": "Kostenlose Testversion",
+        "first": "1 Projekt",
+        "second": "50 priorisierte Optimierungen/Monat",
+        "third": "3 gespeicherte Konfigurationen",
+      "options": {
+        "first": "Community support",
+        "second": "14-tägiger Test",
+        "third": "Keine Kreditkarte erforderlich"
+      }
+    },
+    "essential-card": {
+      "license-name": "Essential",
+      "commons": {
+        "first": "5 Projekte",
+        "second": "200 priorisierte Optimierungen/Monat",
+        "third": "5 gespeicherte Konfigurationen"
+      },
+      "options": {
+        "first": "Email Support",
+        "second": "Projekte vergleichen",
+        "third": "Projekte teilen und besprechen"
+      }
+    },
+    "enterprise-card": {
+      "license-name": "Enterprise",
+      "commons": {
+        "first": "Unbegrenzte Anzahl an Projekten",
+        "second": "2.000 priorisierte Optimierungen/Monat",
+        "third": "100 gespeicherte Konfigurationen"
+      },
+      "options": {
+        "first": "Priorisierter Email Support",
+        "second": "Projekte vergleichen",
+        "third": "Projekte teilen und gemeinsam bearbeiten",
+        "fourth": "Assets teilen"
+      }
+    }
+  },
+  "sidebar": {
+    "overview": "Übersicht",
+    "projects": "Projekte",
+    "subscription": "Abonnement",
+    "imprint": "Impressum",
+    "privacy-policy": "Datenschutzerklärung"
+  },
+  "signin": {
+    "signin-page": "Bei dashboard einloggen",
+    "create-account": "Neuer Nutzer?",
+    "account-link": "Account erstellen",
+    "t-c": "AGB",
+    "dpa": "AVV",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+  "signin-form": {
+    "signin-email": "E-Mail-Adresse",
+    "signin-password": "Passwort",
+    "signin-button": "Login",
+    "forgot-password": "Passwort vergessen?",
+    "emai-required": "Gültige Email-Adresse erforderlich",
+      "password-required": "Password is required" ,
+    "signin-error": {
+      "email-error": "Gültige Email-Adresse erforderlich",
+      "password-error": "Passwort erforderlich",
+      "login-email-error": "Email nicht gefunden",
+      "login-password-error": "Falsches Passwort",
+      "emai-required": "Gültige Email-Adresse erforderlich",
+      "password-required": "Password is required" 
+    }
+  },
+  "signup": {
+    "signup-page-title": "Starte jetzt deine kostenlose 14-tägige Testphase!",
+    "sub-text": "Bereits registriert?",
+    "login-link": "Login",
+    "terms-of-use": "AGB, ",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+  "signup-form": {
+    "signup-email": "E-Mail-Adresse",
+    "signup-password": "Passwort",
+    "signup-button": "Account erstellen",
+    "t-c": "AGB, ",
+    "signup-dialog-title": "Überprüfen Sie Ihren E-Mail-Posteingang!",
+    "signup-dialog-text": "Weitere Anweisungen finden Sie in Ihrem E-Mail-Posteingang. Falls Sie keine E-Mails sehen, überprüfen Sie bitte Ihren Spam- oder Junk-Ordner.",
+    "signup-dialog-link": "Zurück zur Anmeldung",
+    "t-c-link": "de/terms-and-conditions",
+    "dpa-link": "de/data-processing-agreement",
+    "privacy-policy-link": "de/app-privacy-policy",
+    "dpa": "AVV",
+    "checkbox-text": "Mit dem Registrieren erkläre ich mich mit der Geltung der",
+    "checkbox-text-3": "und",
+    "checkbox-text-4": "einverstanden.",
+    "privacy-policy": "Datenschutzerklärung",
+    "password-hint": "Ihr Passwort muss mindestens 8 Zeichen lang sein. Verwenden Sie zur Erhöhung der Sicherheit eine Kombination aus Groß- und Kleinbuchstaben, Zahlen und Sonderzeichen.",
+    "signup-error": {
+      "signup-email-error": "Gültige Email-Adresse erforderlich",
+      "fieldname-error": "ist erforderlich",
+      "signup-password-error": "Gültige Email-Adresse erforderlich",
+      "checkbox-error": "Bestätigung für Registrierung erforderlich."
+    }
+  },
+  "reset-password-page": {
+    "reset-password-page-title": "Passwort vergessen?",
+    "terms-of-use": "Nutzungsbedingungen",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+  "reset-password-form": {
+    "reset-password-text": "Bitte geben Sie die mit Ihrem Konto verknüpfte E-Mail-Adresse ein und wir senden Ihnen per E-Mail einen Link zum Zurücksetzen Ihres Passworts.",
+    "reset-password-email-placeholder": "Email",
+    "reset-password-button": "Passwort anfordern",
+    "reset-password-link-text": "Zurück zum Login"
+  },
+  "new-password-page": {
+    "new-password-page-title": "Gültiges Passwort erforderlich",
+    "terms-of-use": "Nutzungsbedingungen",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+  "new-password-form": {
+    "new-password-place-holder": "Neues Passwort",
+    "confirm-password": "Passwort bestätigen",
+    "new-password-button": "Passwort aktualisieren"
+  },
+  "reset-password-dialog": {
+    "reset-password-dialog-title": "Bitte Email Eingang prüfen!",
+    "reset-password-dialog-text": "Wir haben eine E-Mail an die angegebene Adresse gesendet. Bitte prüfen Sie Ihr Postfach und ggf. den Spamordner, und folgen Sie den Anweisungen, um Ihr Passwort zurückzusetzen.",
+    "reset-password-dialog-link": "Erneut versuchen",
+    "reset-password-dialog-body": "Keine Email erhalten?",
+    "reset-password-dialog-link-text": "Zurück zur Registrierung"
+  },
+  "new-password-dialog": {
+    "new-password-dialog-title": "Passwort aktualisiert!",
+    "new-password-dialog-text": "Passwort erfolgreich aktualisiert! Sie können sich jetzt mit Ihrem neuen Passwort einloggen.",
+    "new-password-button": "Zurück zum Login"
+  },
+  "success-page": {
+    "success-page-title": "Herzlichen Glückwunsch zum Abonnement!",
+    "terms-of-use": "Nutzungsbedingungen",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+  "success-message": {
+    "success-page-text": "Die Bezahlung war erfolgreich. Viel Spaß mit deinem neuen Paket!",
+    "success-page-button": "Zurück zum Dashboard"
+  },
+  "cancel-layout": {
+    "cancel-page-title": "Die Bezahlung ist leider fehlgeschlagen.",
+    "terms-of-use": "Nutzungsbedingungen",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum"
+  },
+  "cancel-message": {
+    "cancel-page-text": "Es gab ein Problem mit deiner Zahlung.<br/>Bitte versuche es noch einmal oder kontaktiere unseren Support.",
+    "cancel-page-button-pay-again": "Bezahlung Wiederholen",
+    "cancel-page-button-contact-support": "Kontaktiere Sales"
+  },
+  "account": {
+    "account-title": "Konto",
+    "privacy-policy": "Datenschutzerklärung",
+    "imprint": "Impressum",
+    "logout": "Ausloggen"
+  }
+}
