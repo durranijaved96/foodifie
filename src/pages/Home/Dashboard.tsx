@@ -20,7 +20,7 @@ import GridLayout, { WidthProvider, type Layout, type Layouts } from "react-grid
 import { useLocalStorage } from "./UseLocalStorage";
 import type { WidgetDef, WidgetId, SelectedWidget } from "./types";
 import { WidgetPicker } from "./WidgetPicker";
-import { TasksWidget, ChartWidget } from "./Widgets";
+import { TasksWidget } from "./Widgets";
 import ProjectWidget from "./ProjectWidget";
 import SubscriptionWidget from "./SubscriptionWidget";
 import { NotesWidget } from "./Widgets";
@@ -144,7 +144,6 @@ const INITIAL: SavedState = {
 
 // Helper to build a layout item (each widget takes half row: w=2 of 4 cols)
 function makeLayoutItem(key: string, w: number, h: number, index: number): Layout {
-     const colSpan = Math.max(1, Math.min(2, w || 2)); // keep two per row
      const x = (index % 2 === 0) ? 0 : 2;              // left/right alternating
      const row = Math.floor(index / 2);
      return {
