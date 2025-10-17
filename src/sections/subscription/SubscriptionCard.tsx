@@ -70,7 +70,7 @@ interface PlanCardProps extends StackProps {
 }
 
 const stripePromise = loadStripe(
-  "pk_test_51OaHrtEVAJm5oLdhdLsKR7dmu3hO1KDKyWQTB1mv4T0y7koWWBLBvmboWq9pCcsPV5oCEjBfNQpSuSak5fwU3Ng8009ku3NoUJ"
+  "pk_test_51PQ5ga07SwzennMJdPH7xdtU6uskaj4hxS2UMe2TPaO7CSUm9Dsbfw7xcr4q9S9BmfGC9aEnPVzSaYBSagCgAnxa00gPmP8gTd"
 );
 const PlanCard: React.FC<PlanCardProps> = ({
   plan,
@@ -371,225 +371,82 @@ const PlanCard: React.FC<PlanCardProps> = ({
   const [isTrialExpiredDialogOpen, setIsTrialExpiredDialogOpen] =
     useState(false);
 
-  useEffect(() => {
-    const fetchSubscriptionStatus = async () => {
-      try {
-        if (!supabase) {
-          console.error("Supabase is not initialized.");
-          return;
-        }
+  // ✅ Flip UI when returning from Stripe success
+useEffect(() => {
+  const isSuccess = window.location.pathname === "/success";
+  const params = new URLSearchParams(window.location.search);
+  const sessionId = params.get("session_id");
 
-        const { data, error } = await supabase.auth.getSession();
-        if (error) {
-          console.error("Error fetching user session:", error.message);
-          return;
-        }
+  if (!isSuccess || !sessionId) return;
 
-        if (!data || !data.session || !data.session.user) {
-          console.error("User session not available.");
-          return;
-        }
-
-        const authId = data.session.user.id;
-        const { data: userIdResponse } = await supabase
-          .from("User")
-          .select("user_id")
-          .eq("auth_id", authId)
-          .single();
-
-        const userId = userIdResponse?.user_id;
-
-        if (!userId) {
-          console.error("Failed to fetch user ID.");
-          return;
-        }
-
-        const { data: tenantData } = await supabase
-          .from("TenantUser")
-          .select("tenant_id")
-          .eq("user", userId)
-          .single();
-
-        const tenantId = tenantData?.tenant_id;
-
-        if (!tenantId) {
-          console.error("Failed to fetch tenant ID.");
-          return;
-        }
-
-        const { data: planData } = await supabase
-          .from("TenantPlan")
-          .select("plan_id, end_date")
-          .eq("tenant_id", tenantId)
-          .single();
-
-        if (!planData || !planData.plan_id) {
-          console.error("Plan details not found.");
-          return;
-        }
-
-        const { data: planNameData } = await supabase
-          .from("Plan")
-          .select("name")
-          .eq("id", planData.plan_id)
-          .single();
-
-        const planName = planNameData?.name || null;
-        const daysLeft = planData.end_date
-          ? calculateDaysLeft(planData.end_date)
-          : null;
-
-        setSubscriptionStatus({ planName, daysLeft });
-
-        if (planName === "Essential" && planData.end_date === null) {
-          setIsCancelled(false);
-          setIsActive(true);
-          setButtonText("Cancel Subscription");
-        } else if (planName === "Essential" && daysLeft !== null) {
-          setIsCancelled(true);
-          setIsActive(daysLeft > 0);
-          setButtonText(daysLeft > 0 ? "Resubscribe" : "Resubscribe");
-        }
-      } catch (error: any) {
-        console.error("Error fetching subscription status:", error.message);
-      }
-    };
-
-    fetchSubscriptionStatus();
-    const intervalId = setInterval(fetchSubscriptionStatus, 5 * 60 * 1000);
-
-    return () => {
-      clearInterval(intervalId);
-    };
-  }, []);
-
-  const handleCheckout = async () => {
-    try {
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-
-      const stripe = await stripePromise;
-      if (!stripe) {
-        throw new Error("Failed to load Stripe");
-      }
-      if (!supabase) {
-        console.error("Supabase client is not available.");
-        return;
-      }
-      const { data, error } = await supabase.auth.getSession();
-      if (error) {
-        console.error("Error fetching user session:", error.message);
-        return;
-      }
-
-      if (!data || !data.session || !data.session.user) {
-        console.error("User session not available.");
-        return;
-      }
-
-      const authId = data.session.user.id;
-      const { data: userIdResponse } = await supabase
-        .from("User")
-        .select("user_id")
-        .eq("auth_id", authId)
-        .single();
-
-      const userId = userIdResponse?.user_id;
-
-      if (!userId) {
-        console.error("Failed to fetch user ID.");
-        return;
-      }
-
-      const { data: tenantData } = await supabase
-        .from("TenantUser")
-        .select("tenant_id")
-        .eq("user", userId)
-        .single();
-
-      const tenantId = tenantData?.tenant_id;
-
-      if (!tenantId) {
-        console.error("Failed to fetch tenant ID.");
-        return;
-      }
-      try {
-        console.log("Creating checkout session...");
-        console.log("Price ID:", priceId);
-        console.log("User ID:", userId);
-        // define list of country codes for EU + UK
-        const countryCodesList = [
-          "DE",
-          "AT",
-          "BE",
-          "BG",
-          "HR",
-          "CY",
-          "CZ",
-          "DK",
-          "EE",
-          "FI",
-          "FR",
-          "GR",
-          "HU",
-          "IE",
-          "IT",
-          "LV",
-          "LT",
-          "LU",
-          "MT",
-          "NL",
-          "PL",
-          "PT",
-          "RO",
-          "SK",
-          "SI",
-          "ES",
-          "SE",
-          "GB",
-          "CH",
-          "NO",
-        ];
-
-        // Fetch tenantId based on userId
-        const stripe = require("stripe")(
-          process.env.REACT_APP_STRIPE_SECRET_KEY
-        );
-        const checkout_session = await stripe.checkout.sessions.create({
-          payment_method_types: ["card", "paypal"], //only card and paypal for now
-          line_items: [{ price: priceId, quantity: 1 }],
-          automatic_tax: { enabled: true },
-          billing_address_collection: "required",
-          client_reference_id: userId,
-          mode: "subscription",
-          success_url: "https://success",
-          cancel_url: "https://cancel",
-          allow_promotion_codes: true,
-          tax_id_collection: { enabled: true },
-          shipping_address_collection: { allowed_countries: countryCodesList },
-        });
-        console.log("Session created:", checkout_session.id);
-        // Redirect the client to the Stripe Checkout
-        // console.log('Please wait, redirecting to payment page...');
-        window.location.href = checkout_session.url;
-        setSnackbarMessage("Subscription upgraded successfully!");
-        setSnackbarOpen(true);
-        setButtonText("Cancel Subscription");
-        //console.log(`<a href="${checkout_session.url}" target="_blank">Click here if you are not redirected.</a>`);
-        return checkout_session;
-      } catch (error: any) {
-        console.error("Error creating checkout session:", error);
-        setSnackbarMessage(
-          `Error initiating checkout session: ${error.message}`
-        );
-        setSnackbarOpen(true);
-        return null;
-      }
-    } catch (error: any) {
-      console.error("Error initiating checkout session:", error.message);
-      setSnackbarMessage(`Error initiating checkout session: ${error.message}`);
+  // (Optional) confirm with the backend; if you prefer, you can skip this
+  fetch("http://localhost:3001/api/confirm-success", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ sessionId }),
+  })
+    .then(() => {
+      // 💡 Update just the UI — no tenant, no DB
+      setSnackbarMessage("Payment successful! Welcome to Essential 🎉");
       setSnackbarOpen(true);
+
+      // Mark as "upgraded" locally so the button changes
+      setIsCancelled(false); // you're now active, not cancelled
+      setSubscriptionStatus({ planName: "Essential", daysLeft: null });
+      // If you want to freeze the button label:
+      // setButtonText("Cancel Subscription");
+    })
+    .catch(() => {
+      // Even if confirm fails, you can still set local UI if you want:
+      setSnackbarMessage("Payment successful!");
+      setSnackbarOpen(true);
+      setIsCancelled(false);
+      setSubscriptionStatus({ planName: "Essential", daysLeft: null });
+    });
+}, []);
+
+ // Minimal Checkout (no tenant, no webhooks)
+ // inside PlanCard
+const handleCheckout = async () => {
+  try {
+    const stripe = await stripePromise;
+    if (!stripe) throw new Error("Failed to load Stripe");
+    if (!priceId) throw new Error("No priceId configured for this plan");
+
+    //  get Supabase auth user id
+    const { data: sessionRes, error: sessionErr } = await supabase!.auth.getSession();
+    if (sessionErr || !sessionRes?.session?.user?.id) {
+      throw new Error("User session not available");
     }
-  };
+    const userId = sessionRes.session.user.id; 
+
+    // send both priceId and userId (your server requires both)
+    const res = await fetch("http://localhost:3001/api/create-checkout-session", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ priceId, userId }),
+    });
+
+    const raw = await res.text();
+    let data: any = null;
+    try { data = JSON.parse(raw); } catch {}
+    if (!res.ok) {
+      const msg = data?.error || raw?.slice(0, 200) || `HTTP ${res.status}`;
+      throw new Error(`Backend error (${res.status}): ${msg}`);
+    }
+
+    const sessionId = data?.sessionId;
+    if (!sessionId) throw new Error(`No sessionId returned. Response: ${raw.slice(0,200)}`);
+
+    const { error } = await stripe.redirectToCheckout({ sessionId });
+    if (error) throw error;
+
+  } catch (err: any) {
+    console.error("Checkout error:", err);
+    setSnackbarMessage(`Payment error: ${err.message}`);
+    setSnackbarOpen(true);
+  }
+};
 
   // Modify the handleCancelSubscription function
   const handleCancelSubscription = async (authId: string) => {

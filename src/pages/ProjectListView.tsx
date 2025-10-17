@@ -206,46 +206,7 @@ export default function InvoiceListView() {
     },
   ] as const;
 
-  const handleCreateProject = useCallback(async () => {
-    try {
-      // Check if supabase is available
-      if (!supabase) {
-        console.error("Supabase client is not available.");
-        return;
-      }
-
-      // Fetch user data from Supabase
-      const { data, error } = await supabase.auth.getUser();
-
-      if (error || !data || !data.user || !data.user.id) {
-        console.error("Error fetching user from Supabase:", error);
-        console.error("User is not authenticated or does not have an ID");
-        return;
-      }
-
-      // Your secret key for signing the token
-      const secretKey = "x5usha342Fe23g32";
-
-      // Payload for the token
-      const tokenPayload = {
-        user_id: data.user.id,
-        project_id: "empty", // Replace with the actual project_id
-      };
-
-      // Sign the token using your secret key
-      const authToken = jwt.sign(tokenPayload, secretKey, {
-        expiresIn: 604800, // Expires in 7 days
-      });
-
-      // Your create URL with the token as a query parameter
-      const createUrl = ` https://project.com/?token=${authToken}`;
-
-      // Open the createUrl in a new tab
-      window.open(createUrl, "_blank");
-    } catch (error) {
-      console.error("Unexpected error during token generation:", error);
-    }
-  }, []);
+  
   const handleFilters = useCallback(
     (name: string, value: IInvoiceTableFilterValue) => {
       table.onResetPage();
@@ -422,7 +383,7 @@ export default function InvoiceListView() {
           action={
             <BouncyButton
               variant="outlined"
-              onClick={handleCreateProject}
+             
               style={{
                 borderRadius: 12,
                 color: "#00A5AA",

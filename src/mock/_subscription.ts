@@ -28,8 +28,8 @@ const initHomePlans = (t: TFunction) => {
         t('subscription.essential-card.options.second'),
         t('subscription.essential-card.options.third')
       ],
-      price: 50,
-      priceId: 'price_1ObiLhEVAJm5oLdh49QiGaPM',
+      price: 10,
+      priceId: 'price_1PQ5jP07SwzennMJmoNpav0v',
       buttonState: true,
     },
     {
@@ -74,8 +74,8 @@ const initHomePlans = (t: TFunction) => {
         t('subscription.essential-card.options.second'),
         t('subscription.essential-card.options.third')
       ],
-      price: 500,
-      priceId: 'price_1ObiMjEVAJm5oLdh6Fk2v4yN',
+      price: 100,
+      priceId: 'price_1PQ6h307SwzennMJYuwRTiUd',
       buttonState: true,
     },
     {

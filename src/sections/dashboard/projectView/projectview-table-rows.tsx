@@ -102,7 +102,7 @@ export default function InvoiceTableRow({
                 <Link
                   noWrap
                   variant="body2"
-                  onClick={onViewRow}
+                 
                   sx={{ color: "text.disabled", cursor: "pointer" }}
                 >
                   {i18n.t(

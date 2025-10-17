@@ -31,7 +31,7 @@ const TABS = [
     value: "billing",
     label: "subscription.tabs-label-yearly",
     icon: <Iconify icon="solar:bill-list-bold" width={24} />,
-    priceId: "price_1PQ5jP07SwzennMJmoNpav0v",
+    priceId: "price_1PQ6h307SwzennMJYuwRTiUd",
   },
 ];
 

@@ -168,7 +168,7 @@ export const _homePlans = [
       i18n.t('subscription.essential-card.options.third'),
     ],
     price: 50,
-    priceId: "price_1P69akEVAJm5oLdhxwaG6HjH"
+    priceId: "price_1PQ6h307SwzennMJYuwRTiUd"
   },
   {
     license: i18n.t('subscription.enterprise-card.license-name'),
@@ -203,7 +203,7 @@ export const _homePlansYearly = [
       i18n.t('subscription.essential-card.options.third'),
     ],
     price: 500,
-    priceId: "price_1P69akEVAJm5oLdhXYaBNfsz"
+    priceId: "price_1PQ6h307SwzennMJYuwRTiUd"
   },
   {
     license: i18n.t('subscription.enterprise-card.license-name'),
