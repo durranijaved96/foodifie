@@ -3,7 +3,7 @@
 This repository serves as the frontend codebase for the AI based dashboard. Here, you will find all the frontend-related code, including responsible for the user interface, interactions, and visual elements of the configurator.
 
 Use email : durranijaved96@gmail.com
-Password: Munich12345@#
+Password: Inside12345@#
 
 # Getting Started with Create React App
 
