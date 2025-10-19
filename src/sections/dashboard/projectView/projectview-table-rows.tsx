@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { format } from "date-fns";
-// @mui
 import Link from "@mui/material/Link";
 import Button from "@mui/material/Button";
 import Avatar from "@mui/material/Avatar";
@@ -11,32 +10,35 @@ import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ListItemText from "@mui/material/ListItemText";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  Box,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import styled from "@emotion/styled";
+import { useState } from "react";
+
 import { IInvoice } from "../../../types.ts/invoice";
 import { useBoolean } from "../../../hooks/use-boolean";
 import usePopover from "../../../components/custom-popover/use-popover";
 import Label from "../../../components/label/label";
 import Iconify from "../../../components/iconify/Iconify";
 import CustomPopover from "../../../components/custom-popover/custom-popover";
-import styled from "@emotion/styled";
-import i18n from "../../../i18n";
-import { t } from "i18next";
-import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, DialogActions, DialogContent, DialogTitle, Box } from "@mui/material";
-import { useState } from "react";
 
 // ----------------------------------------------------------------------
 
-const StyledTableCell = styled(TableCell)({
-  // Add any additional styling for TableCell if needed
-});
+const StyledTableCell = styled(TableCell)({});
 
-const StyledImageContainer = styled("div")(({ theme }) => ({
+const StyledImageContainer = styled("div")(() => ({
   display: "flex",
   justifyContent: "left",
   alignItems: "center",
 }));
 
-const StyledAvatar = styled("div")(({ theme }) => ({
+const StyledAvatar = styled("div")(() => ({
   width: 40,
   height: 40,
   flexShrink: 0,
@@ -57,33 +59,18 @@ export default function InvoiceTableRow({
 }: Props) {
   const { created_at, updated_at, client, status, name } = row;
 
-  const statustranslationkey = `dashboard.projectlist.table-row.label-status-${status
-    .toLowerCase()
-    .split(" ")
-    .join("-")}`;
-  
-  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
   const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
 
   const confirm = useBoolean();
   const popover = usePopover();
 
-  const handleCloseDeleteDialog = () => {
-    setIsDeleteDialogOpen(false);
-  };
-
-  const handleOpenDetailsDialog = () => {
-    setIsDetailsDialogOpen(true);
-  };
-
-  const handleCloseDetailsDialog = () => {
-    setIsDetailsDialogOpen(false);
-  };
+  const handleOpenDetailsDialog = () => setIsDetailsDialogOpen(true);
+  const handleCloseDetailsDialog = () => setIsDetailsDialogOpen(false);
 
   return (
     <>
       <TableRow>
-        <StyledTableCell></StyledTableCell>
+        <StyledTableCell />
 
         <TableCell sx={{ display: "flex", alignItems: "flex-start" }}>
           <Avatar alt={name} sx={{ mr: 2 }}>
@@ -104,7 +91,7 @@ export default function InvoiceTableRow({
                 onClick={handleOpenDetailsDialog}
                 sx={{ color: "text.disabled", cursor: "pointer" }}
               >
-                {i18n.t("dashboard.projectlist.table-row.link-project-details")}
+                View project details
               </Link>
             }
           />
@@ -151,12 +138,9 @@ export default function InvoiceTableRow({
               (status === "Draft" && "warning") ||
               "default"
             }
+            sx={{ borderRadius: 3 }}
           >
-            {t(
-              `dashboard.projectlist.table-row.label-status-${status
-                .toLowerCase()
-                .replace(/ /g, "-")}`
-            )}
+            {status}
           </Label>
         </TableCell>
 
@@ -164,6 +148,7 @@ export default function InvoiceTableRow({
           <IconButton
             color={popover.open ? "inherit" : "default"}
             onClick={popover.onOpen}
+            sx={{ borderRadius: 3 }}
           >
             <Iconify icon="eva:more-vertical-fill" />
           </IconButton>
@@ -174,15 +159,16 @@ export default function InvoiceTableRow({
         open={popover.open}
         onClose={popover.onClose}
         arrow="right-top"
-        sx={{ width: 160 }}
+        sx={{ width: 160, "& .MuiPaper-root": { borderRadius: 3 } }}
       >
         <MenuItem
           onClick={() => {
             onEditRow();
             popover.onClose();
           }}
+          sx={{ borderRadius: 3 }}
         >
-          <Iconify icon="solar:pen-bold" /> {t("dashboard.btn-prtoject-edit")}
+          <Iconify icon="solar:pen-bold" /> Edit project
         </MenuItem>
 
         <Divider sx={{ borderStyle: "dashed" }} />
@@ -192,67 +178,73 @@ export default function InvoiceTableRow({
             confirm.onTrue();
             popover.onClose();
           }}
-          sx={{ color: "error.main" }}
+          sx={{ color: "error.main", borderRadius: 3 }}
         >
           <Iconify icon="solar:trash-bin-trash-bold" />
-          {t("dashboard.btn-project-delete")}
+          Delete project
         </MenuItem>
       </CustomPopover>
 
-      {/* Project Details Modal */}
-      <Dialog 
-        open={isDetailsDialogOpen} 
+      {/* Project Details Dialog */}
+      <Dialog
+        open={isDetailsDialogOpen}
         onClose={handleCloseDetailsDialog}
         maxWidth="sm"
         fullWidth
+        PaperProps={{
+          sx: {
+            borderRadius: 3,
+            boxShadow: "0px 8px 24px rgba(0,0,0,0.1)",
+          },
+        }}
       >
-        <DialogTitle sx={{ 
-          display: "flex", 
-          justifyContent: "space-between", 
-          alignItems: "center",
-          pb: 2 
-        }}>
-          <Typography variant="h5" sx={{ fontWeight: 700 }}>
-            {t("dashboard.dialog-details-title") || "Project Details"}
+        <DialogTitle
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            borderBottom: "1px solid #E0E0E0",
+            py: 2,
+            px: 3,
+          }}
+        >
+          <Typography variant="h6" sx={{ fontWeight: 700, color: "#212B36" }}>
+            Project Details
           </Typography>
           <IconButton
             onClick={handleCloseDetailsDialog}
             sx={{
-              color: "#000",
+              borderRadius: 2,
+              border: "1px solid #E0E0E0",
+              backgroundColor: "#F9FAFB",
+              "&:hover": {
+                backgroundColor: "#F4F6F8",
+              },
             }}
           >
-            <CloseIcon />
+            <CloseIcon fontSize="small" />
           </IconButton>
         </DialogTitle>
 
-        <DialogContent dividers sx={{ py: 3 }}>
-          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
-            {/* Project Name */}
-            <Box>
-              <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
-                {t("dashboard.dialog-details-name") || "Project Name"}
-              </Typography>
-              <Typography variant="body1" sx={{ mt: 0.5, fontWeight: 500 }}>
-                {name}
-              </Typography>
-            </Box>
-
-            {/* Client */}
-            <Box>
-              <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
-                {t("dashboard.dialog-details-client") || "Client"}
-              </Typography>
-              <Typography variant="body1" sx={{ mt: 0.5 }}>
-                {client}
-              </Typography>
-            </Box>
-
-            {/* Status */}
-            <Box>
-              <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
-                {t("dashboard.dialog-details-status") || "Status"}
-              </Typography>
-              <Box sx={{ mt: 0.5 }}>
+        <DialogContent
+          sx={{
+            py: 3,
+            px: 4,
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+            backgroundColor: "#FFF",
+            direction: "rtl",
+            textAlign: "right",
+          }}
+        >
+          <br />
+          {[
+            { label: "Project Name", value: name, icon: "mdi:folder-outline" },
+            { label: "Client", value: client, icon: "mdi:account-outline" },
+            {
+              label: "Status",
+              value: (
                 <Label
                   variant="soft"
                   color={
@@ -261,43 +253,75 @@ export default function InvoiceTableRow({
                     (status === "Draft" && "warning") ||
                     "default"
                   }
+                  sx={{
+                    borderRadius: 3,
+                    textTransform: "capitalize",
+                    direction: "ltr", // keep text left-to-right inside status chip
+                  }}
                 >
-                  {t(
-                    `projectlist.table-row.label-status-${status
-                      .toLowerCase()
-                      .replace(/ /g, "-")}`
-                  )}
+                  {status}
                 </Label>
-              </Box>
-            </Box>
+              ),
+              icon: "mdi:chart-timeline-variant-shimmer",
+            },
+            created_at && {
+              label: "Created",
+              value: format(new Date(created_at), "dd MMM yyyy 'at' p"),
+              icon: "mdi:calendar-plus-outline",
+            },
+            updated_at && {
+              label: "Last Updated",
+              value: format(new Date(updated_at), "dd MMM yyyy 'at' p"),
+              icon: "mdi:update",
+            },
+          ]
+            .filter(Boolean)
+            .map((field, idx) => (
+              <Box key={idx}>
+                <Box
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: 1,
+                    flexDirection: "row-reverse", // 👈 flip icon and label order
+                  }}
+                >
+                  <Iconify icon={field.icon as string} width={16} height={16} />
+                  <Typography
+                    variant="caption"
+                    sx={{
+                      color: "#637381",
+                      fontWeight: 600,
+                      textTransform: "uppercase",
+                      letterSpacing: 0.3,
+                    }}
+                  >
+                    {field.label}
+                  </Typography>
+                </Box>
 
-            {/* Created Date */}
-            {created_at && (
-              <Box>
-                <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
-                  {t("dashboard.dialog-details-created") || "Created"}
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 0.5 }}>
-                  {format(new Date(created_at), "dd MMM yyyy 'at' p")}
-                </Typography>
-              </Box>
-            )}
-
-            {/* Last Updated */}
-            {updated_at && (
-              <Box>
-                <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
-                  {t("dashboard.dialog-details-updated") || "Last Updated"}
-                </Typography>
-                <Typography variant="body1" sx={{ mt: 0.5 }}>
-                  {format(new Date(updated_at), "dd MMM yyyy 'at' p")}
+                <Typography
+                  variant="body1"
+                  sx={{
+                    mt: 0.5,
+                    fontWeight: 500,
+                    direction: "ltr", // 👈 keep value text left-to-right (for dates etc.)
+                  }}
+                >
+                  {field.value}
                 </Typography>
               </Box>
-            )}
-          </Box>
+            ))}
         </DialogContent>
 
-        <DialogActions sx={{ px: 3, py: 2 }}>
+        <DialogActions
+          sx={{
+            borderTop: "1px solid #E0E0E0",
+            px: 3,
+            py: 2.5,
+            justifyContent: "flex-end",
+          }}
+        >
           <Button
             onClick={handleCloseDetailsDialog}
             variant="contained"
@@ -307,164 +331,143 @@ export default function InvoiceTableRow({
               textTransform: "none",
               fontWeight: 600,
               px: 3,
+              borderRadius: 2,
               "&:hover": {
                 backgroundColor: "#32B7BB",
               },
             }}
           >
-            {t("dashboard.dialog-details-btn-close") || "Close"}
+            Close
           </Button>
         </DialogActions>
       </Dialog>
 
       {/* Delete Confirmation Dialog */}
-      <Dialog open={confirm.value} onClose={confirm.onFalse}>
-        <IconButton
-          onClick={confirm.onFalse}
+      <Dialog
+        open={confirm.value}
+        onClose={confirm.onFalse}
+        maxWidth="xs"
+        PaperProps={{
+          sx: {
+            borderRadius: 3,
+            boxShadow: "0px 8px 24px rgba(0,0,0,0.12)",
+          },
+        }}
+      >
+        <DialogTitle
           sx={{
-            position: "absolute",
-            top: 8,
-            right: 8,
-            color: "#000",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            px: 3,
+            py: 2,
+            borderBottom: "1px solid #E0E0E0",
           }}
         >
-          <CloseIcon />
-        </IconButton>
+          <Typography variant="h6" sx={{ fontWeight: 700, color: "#212B36" }}>
+            Delete Project
+          </Typography>
+          <IconButton
+            onClick={confirm.onFalse}
+            sx={{
+              borderRadius: 3,
+              border: "1px solid #E0E0E0",
+              backgroundColor: "#F9FAFB",
+              "&:hover": { backgroundColor: "#F4F6F8" },
+            }}
+          >
+            <CloseIcon fontSize="small" />
+          </IconButton>
+        </DialogTitle>
 
         <DialogContent
           sx={{
+            display: "flex",
+            flexDirection: "column",
             alignItems: "center",
-            gap: "24px",
-            padding: "32px 64px",
-            borderRadius: "4px",
-            border: "1px #E0E0E0",
-            background: "var(--primary-contrast, #FFF)",
+            textAlign: "center",
+            p: 4,
+            backgroundColor: "#FFF",
           }}
         >
-          <StyledImageContainer>
-            <StyledAvatar>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="40"
-                height="40"
-                viewBox="0 0 40 40"
-                fill="none"
-                style={{ width: "40px", height: "40px", flexShrink: 0 }}
-              >
-                <path
-                  d="M20.0002 3.33337C10.8002 3.33337 3.3335 10.8 3.3335 20C3.3335 29.2 10.8002 36.6667 20.0002 36.6667C29.2002 36.6667 36.6668 29.2 36.6668 20C36.6668 10.8 29.2002 3.33337 20.0002 3.33337ZM21.6668 28.3334H18.3335V25H21.6668V28.3334ZM21.6668 21.6667H18.3335V11.6667H21.6668V21.6667Z"
-                  fill="#4F536E"
-                />
-              </svg>
-            </StyledAvatar>
-          </StyledImageContainer>
+          <Box sx={{ mb: 2 }}>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="40"
+              height="40"
+              viewBox="0 0 40 40"
+              fill="none"
+            >
+              <path
+                d="M20.0002 3.33337C10.8002 3.33337 3.3335 10.8 3.3335 20C3.3335 29.2 10.8002 36.6667 20.0002 36.6667C29.2002 36.6667 36.6668 29.2 36.6668 20C36.6668 10.8 29.2002 3.33337 20.0002 3.33337ZM21.6668 28.3334H18.3335V25H21.6668V28.3334ZM21.6668 21.6667H18.3335V11.6667H21.6668V21.6667Z"
+                fill="#4F536E"
+              />
+            </svg>
+          </Box>
 
-          <Typography
-            variant="h4"
-            sx={{
-              color: "var(--Text-Primary, #212B36)",
-              fontFamily: "Public Sans, sans-serif",
-              fontSize: "24px",
-              fontWeight: 700,
-              lineHeight: "36px",
-              alignSelf: "center",
-              fontStyle: "normal",
-            }}
-          >
-            {t("dashboard.dialog-delete-title")}
+          <Typography variant="h6" sx={{ fontWeight: 700, color: "#212B36" }}>
+            Are you sure you want to delete this project?
           </Typography>
-
           <Typography
             variant="body2"
             sx={{
-              width: "350px",
-              color: "var(--Text-Secondary, #637381)",
-              fontFamily: "Public Sans, sans-serif",
-              fontSize: "14px",
-              fontStyle: "normal",
-              fontWeight: 400,
+              color: "#637381",
+              mt: 1,
+              maxWidth: 360,
               lineHeight: "22px",
             }}
           >
-            <br />
-            {t("dashboard.dialog-delete-project")}{" "}
-            <span
-              style={{
-                color: "var(--secondary-dark, #4F536E)",
-                fontFamily: "Public Sans, sans-serif",
-                fontSize: 14,
-                fontWeight: 600,
-                fontStyle: "normal",
-              }}
-            >
-              {t("dashboard.dialog-delete-proceed")}
-            </span>
+            This action cannot be undone. Deleting this project will remove all
+            related data.
           </Typography>
-          <br />
+        </DialogContent>
 
-          <DialogActions
+        <DialogActions
+          sx={{
+            display: "flex",
+            justifyContent: "space-between",
+            borderTop: "1px solid #E0E0E0",
+            px: 3,
+            py: 2.5,
+          }}
+        >
+          <Button
+            onClick={confirm.onFalse}
+            variant="outlined"
             sx={{
-              display: "flex",
-              justifyContent: "space-between",
-              paddingBottom: "16px",
-              paddingRight: "16px",
-              paddingLeft: "16px",
+              borderRadius: 3,
+              color: "#212B36",
+              borderColor: "#212B36",
+              fontWeight: 600,
+              textTransform: "none",
+              px: 3,
+              "&:hover": {
+                backgroundColor: "#F4F6F8",
+                borderColor: "#212B36",
+              },
             }}
           >
-            <Button
-              onClick={handleCloseDeleteDialog}
-              size="small"
-              type="submit"
-              variant="outlined"
-              sx={{
-                fontFamily: "Public Sans, sans-serif",
-                fontSize: "15px",
-                fontStyle: "normal",
-                fontWeight: 700,
-                borderRadius: 2,
-                borderColor: "black",
-                color: "black",
-                textTransform: "none",
-                width: "auto",
-                padding: "8px 16px",
-                "&:hover": {
-                  backgroundColor: "transparent",
-                  borderColor: "black",
-                  color: "black",
-                },
-                boxShadow: "none",
-              }}
-            >
-              {t("dashboard.dialog-delete-btn-cancel")}
-            </Button>
+            Cancel
+          </Button>
 
-            <Button
-              onClick={onDeleteRow}
-              size="small"
-              type="submit"
-              variant="contained"
-              sx={{
-                fontFamily: "Public Sans, sans-serif",
-                fontSize: "15px",
-                fontStyle: "normal",
-                fontWeight: 700,
-                borderRadius: 2,
-                backgroundColor: "#00A5AA",
-                color: "white",
-                textTransform: "none",
-                width: "auto",
-                padding: "8px 32px",
-                "&:hover": {
-                  backgroundColor: "#32B7BB",
-                  color: "white",
-                },
-                boxShadow: "none",
-              }}
-            >
-              {t("dashboard.dialog-delete-btn-delete")}
-            </Button>
-          </DialogActions>
-        </DialogContent>
+          <Button
+            onClick={onDeleteRow}
+            variant="contained"
+            sx={{
+              borderRadius: 3,
+              backgroundColor: "#00A5AA",
+              color: "#FFF",
+              fontWeight: 600,
+              textTransform: "none",
+              px: 4,
+              "&:hover": {
+                backgroundColor: "#32B7BB",
+              },
+            }}
+          >
+            Delete
+          </Button>
+        </DialogActions>
       </Dialog>
     </>
   );
