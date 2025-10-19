@@ -68,7 +68,7 @@ const StyledAvatar = styled("div")(({ theme }) => ({
   width: 40,
   height: 40,
 }));
-/*const CookieBannerContainer = styled("div")(({ theme }) => ({
+const CookieBannerContainer = styled("div")(({ theme }) => ({
   display: "flex",
   position: "fixed",
   bottom: 20,
@@ -209,11 +209,11 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ onAccept, onReject }) => {
     </CookieBannerContainer>
   );
 };
-*/
+
 export default function LoginPage() {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [loading, setLoading] = useState(false);
-  /* const [showCookieBanner, setShowCookieBanner] = useState(true);
+   const [showCookieBanner, setShowCookieBanner] = useState(true);
 
   const handleCookieAccept = () => {
     setShowCookieBanner(false);
@@ -222,18 +222,18 @@ export default function LoginPage() {
   const handleCookieReject = () => {
     setShowCookieBanner(false);
   };
-*/
+
   return (
     <>
       <Helmet>
-        <title>Login | Test</title>
+        <title>Login | foodifie</title>
       </Helmet>
       <br />
       <Box
         display="flex"
         justifyContent="center"
         alignItems="center"
-        bgcolor="#FAFAFA" // Set background color for the entire page
+        bgcolor="#FFFF" // Set background color for the entire page
       >
         <Container maxWidth="md">
           <HeaderLanding />
@@ -303,12 +303,12 @@ export default function LoginPage() {
                   )}
                 </CardContent>
               </StyledCard>
-              {/*{showCookieBanner && (
+              {showCookieBanner && (
                 <CookieBanner
                   onAccept={handleCookieAccept}
                   onReject={handleCookieReject}
                 />
-              )}*/}
+              )}
               <Box
                 display="flex"
                 justifyContent="center"

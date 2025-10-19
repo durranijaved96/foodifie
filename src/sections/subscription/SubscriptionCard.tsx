@@ -76,7 +76,7 @@ const PlanCard: React.FC<PlanCardProps> = ({
   plan,
   sx,
   userPlanInfo,
-  disabled = false, // Default value for disabled prop
+  disabled = false,
   ...other
 }: PlanCardProps) => {
   const { license, commons, options, price, priceId } = plan;

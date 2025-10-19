@@ -54,7 +54,17 @@
         "btn-project-delete": "Löschen",
         "label-status-done": "Abgeschlossen",
         "label-status-in-progress": "In Bearbeitung",
-        "label-status-draft": "Entwurf"
+        "label-status-draft": "Entwurf",
+        "dialog-details-title": "Projektdetails",
+          "dialog-details-name": "Projektname",
+          "dialog-details-client": "Kunde",
+          "dialog-details-status": "Status",
+          "dialog-details-created": "Erstellt am",
+          "dialog-details-updated": "Zuletzt aktualisiert",
+          "dialog-details-btn-close": "Schließen"
+        
+        
+        
       }
     }
   },

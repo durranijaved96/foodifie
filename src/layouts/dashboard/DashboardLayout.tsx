@@ -43,7 +43,7 @@ const Backdrop = styled("div")<BackdropProps>(({ open }) => ({
   left: 0,
   width: "100%",
   height: "100%",
-  backgroundColor: "rgba(0, 0, 0, 0.7)", // Update this to your desired color intensity and transparency
+  backgroundColor: "#FFFF",
   zIndex: open ? 9999 : -1,
   pointerEvents: open ? "auto" : "none",
   opacity: open ? 1 : 0,

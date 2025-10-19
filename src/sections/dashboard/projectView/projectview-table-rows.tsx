@@ -7,7 +7,6 @@ import Avatar from "@mui/material/Avatar";
 import Divider from "@mui/material/Divider";
 import MenuItem from "@mui/material/MenuItem";
 import TableRow from "@mui/material/TableRow";
-//import Checkbox from "@mui/material/Checkbox";
 import TableCell from "@mui/material/TableCell";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
@@ -18,15 +17,13 @@ import usePopover from "../../../components/custom-popover/use-popover";
 import Label from "../../../components/label/label";
 import Iconify from "../../../components/iconify/Iconify";
 import CustomPopover from "../../../components/custom-popover/custom-popover";
-//import ConfirmDialog from "../../../components/custom-dialog/custom-dialog";
 import styled from "@emotion/styled";
 import i18n from "../../../i18n";
 import { t } from "i18next";
 import CloseIcon from "@mui/icons-material/Close";
-import { Dialog, DialogActions, DialogContent } from "@mui/material";
+import { Dialog, DialogActions, DialogContent, DialogTitle, Box } from "@mui/material";
 import { useState } from "react";
 
-// hooks
 // ----------------------------------------------------------------------
 
 const StyledTableCell = styled(TableCell)({
@@ -37,7 +34,6 @@ const StyledImageContainer = styled("div")(({ theme }) => ({
   display: "flex",
   justifyContent: "left",
   alignItems: "center",
-  //marginBottom: theme.spacing(4),
 }));
 
 const StyledAvatar = styled("div")(({ theme }) => ({
@@ -45,9 +41,9 @@ const StyledAvatar = styled("div")(({ theme }) => ({
   height: 40,
   flexShrink: 0,
 }));
-type Props = {
-  row: IInvoice; // Assuming IInvoice matches your API response
 
+type Props = {
+  row: IInvoice;
   onViewRow: VoidFunction;
   onEditRow: VoidFunction;
   onDeleteRow: VoidFunction;
@@ -55,7 +51,6 @@ type Props = {
 
 export default function InvoiceTableRow({
   row,
-
   onViewRow,
   onEditRow,
   onDeleteRow,
@@ -66,158 +61,263 @@ export default function InvoiceTableRow({
     .toLowerCase()
     .split(" ")
     .join("-")}`;
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  
+  const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+  const [isDetailsDialogOpen, setIsDetailsDialogOpen] = useState(false);
 
   const confirm = useBoolean();
-
   const popover = usePopover();
 
-  //const handleOpenDialog = () => {
-  // setIsDialogOpen(true);
-  // };
-  // Function to close the dialog
-  const handleCloseDialog = () => {
-    setIsDialogOpen(false);
+  const handleCloseDeleteDialog = () => {
+    setIsDeleteDialogOpen(false);
+  };
+
+  const handleOpenDetailsDialog = () => {
+    setIsDetailsDialogOpen(true);
+  };
+
+  const handleCloseDetailsDialog = () => {
+    setIsDetailsDialogOpen(false);
   };
 
   return (
     <>
-      <>
-        <TableRow>
-          <StyledTableCell></StyledTableCell>
+      <TableRow>
+        <StyledTableCell></StyledTableCell>
 
-          <TableCell sx={{ display: "flex", alignItems: "flex-start" }}>
-            <Avatar alt={name} sx={{ mr: 2 }}>
-              {name.charAt(0).toUpperCase()}
-            </Avatar>
+        <TableCell sx={{ display: "flex", alignItems: "flex-start" }}>
+          <Avatar alt={name} sx={{ mr: 2 }}>
+            {name.charAt(0).toUpperCase()}
+          </Avatar>
 
+          <ListItemText
+            disableTypography
+            primary={
+              <Typography variant="body2" noWrap>
+                {name}
+              </Typography>
+            }
+            secondary={
+              <Link
+                noWrap
+                variant="body2"
+                onClick={handleOpenDetailsDialog}
+                sx={{ color: "text.disabled", cursor: "pointer" }}
+              >
+                {i18n.t("dashboard.projectlist.table-row.link-project-details")}
+              </Link>
+            }
+          />
+        </TableCell>
+
+        <TableCell>{client}</TableCell>
+
+        <TableCell>
+          {created_at && (
             <ListItemText
-              disableTypography
-              primary={
-                <Typography variant="body2" noWrap>
-                  {name}
-                </Typography>
-              }
-              secondary={
-                <Link
-                  noWrap
-                  variant="body2"
-                 
-                  sx={{ color: "text.disabled", cursor: "pointer" }}
-                >
-                  {i18n.t(
-                    "dashboard.projectlist.table-row.link-project-details"
-                  )}
-                </Link>
-              }
+              primary={format(new Date(created_at), "dd MMM yyyy")}
+              secondary={format(new Date(created_at), "p")}
+              primaryTypographyProps={{ typography: "body2", noWrap: true }}
+              secondaryTypographyProps={{
+                mt: 0.5,
+                component: "span",
+                typography: "caption",
+              }}
             />
-          </TableCell>
+          )}
+        </TableCell>
 
-          <TableCell>{client}</TableCell>
+        <TableCell>
+          {updated_at && (
+            <ListItemText
+              primary={format(new Date(updated_at), "dd MMM yyyy")}
+              secondary={format(new Date(updated_at), "p")}
+              primaryTypographyProps={{ typography: "body2", noWrap: true }}
+              secondaryTypographyProps={{
+                mt: 0.5,
+                component: "span",
+                typography: "caption",
+              }}
+            />
+          )}
+        </TableCell>
 
-          <TableCell>
-            {created_at && (
-              <ListItemText
-                primary={format(new Date(created_at), "dd MMM yyyy")}
-                secondary={format(new Date(created_at), "p")}
-                primaryTypographyProps={{ typography: "body2", noWrap: true }}
-                secondaryTypographyProps={{
-                  mt: 0.5,
-                  component: "span",
-                  typography: "caption",
-                }}
-              />
+        <TableCell>
+          <Label
+            variant="soft"
+            color={
+              (status === "Done" && "success") ||
+              (status === "In Progress" && "info") ||
+              (status === "Draft" && "warning") ||
+              "default"
+            }
+          >
+            {t(
+              `dashboard.projectlist.table-row.label-status-${status
+                .toLowerCase()
+                .replace(/ /g, "-")}`
             )}
-          </TableCell>
+          </Label>
+        </TableCell>
 
-          <TableCell>
-            {updated_at && (
-              <ListItemText
-                primary={format(new Date(updated_at), "dd MMM yyyy")}
-                secondary={format(new Date(updated_at), "p")}
-                primaryTypographyProps={{ typography: "body2", noWrap: true }}
-                secondaryTypographyProps={{
-                  mt: 0.5,
-                  component: "span",
-                  typography: "caption",
-                }}
-              />
-            )}
-          </TableCell>
-          <TableCell>
-            <Label
-              variant="soft"
-              color={
-                (status === "Done" && "success") ||
-                (status === "In Progress" && "info") ||
-                (status === "Draft" && "warning") ||
-                "default"
-              }
-            >
-              {t(
-                `dashboard.projectlist.table-row.label-status-${status
-                  .toLowerCase()
-                  .replace(/ /g, "-")}`
-              )}
-            </Label>
-          </TableCell>
-          <TableCell align="right" sx={{ px: 1 }}>
-            <IconButton
-              color={popover.open ? "inherit" : "default"}
-              onClick={popover.onOpen}
-            >
-              <Iconify icon="eva:more-vertical-fill" />
-            </IconButton>
-          </TableCell>
-        </TableRow>
+        <TableCell align="right" sx={{ px: 1 }}>
+          <IconButton
+            color={popover.open ? "inherit" : "default"}
+            onClick={popover.onOpen}
+          >
+            <Iconify icon="eva:more-vertical-fill" />
+          </IconButton>
+        </TableCell>
+      </TableRow>
 
-        <CustomPopover
-          open={popover.open}
-          onClose={popover.onClose}
-          arrow="right-top"
-          sx={{ width: 160 }}
+      <CustomPopover
+        open={popover.open}
+        onClose={popover.onClose}
+        arrow="right-top"
+        sx={{ width: 160 }}
+      >
+        <MenuItem
+          onClick={() => {
+            onEditRow();
+            popover.onClose();
+          }}
         >
-          <MenuItem
-            onClick={() => {
-              onEditRow();
-              popover.onClose();
-            }}
-          >
-            <Iconify icon="solar:pen-bold" /> {t("dashboard.btn-prtoject-edit")}
-          </MenuItem>
+          <Iconify icon="solar:pen-bold" /> {t("dashboard.btn-prtoject-edit")}
+        </MenuItem>
 
-          <Divider sx={{ borderStyle: "dashed" }} />
+        <Divider sx={{ borderStyle: "dashed" }} />
 
-          <MenuItem
-            onClick={() => {
-              confirm.onTrue();
-              popover.onClose();
-            }}
-            sx={{ color: "error.main" }}
-          >
-            <Iconify icon="solar:trash-bin-trash-bold" />
-            {t("dashboard.btn-project-delete")}
-          </MenuItem>
-        </CustomPopover>
-
-        {/*<ConfirmDialog
-        open={confirm.value}
-        onClose={confirm.onFalse}
-
-        sx={{
-          color: "var(--Text-Secondary, #637381)",
-          fontFamily: "Public Sans, sans-serif",
-          fontSize: "14px",
-          fontStyle: "normal",
-          fontWeight: 400,
-          lineHeight: "22px",
-        }}
-        title={t("dashboard.dialog-delete-title")}
-        content={t("dashboard.dialog-delete-project")}
-        action={<Button variant="contained" color="error" onClick={onDeleteRow}>
+        <MenuItem
+          onClick={() => {
+            confirm.onTrue();
+            popover.onClose();
+          }}
+          sx={{ color: "error.main" }}
+        >
+          <Iconify icon="solar:trash-bin-trash-bold" />
           {t("dashboard.btn-project-delete")}
-        </Button>} /> */}
-      </>
+        </MenuItem>
+      </CustomPopover>
+
+      {/* Project Details Modal */}
+      <Dialog 
+        open={isDetailsDialogOpen} 
+        onClose={handleCloseDetailsDialog}
+        maxWidth="sm"
+        fullWidth
+      >
+        <DialogTitle sx={{ 
+          display: "flex", 
+          justifyContent: "space-between", 
+          alignItems: "center",
+          pb: 2 
+        }}>
+          <Typography variant="h5" sx={{ fontWeight: 700 }}>
+            {t("dashboard.dialog-details-title") || "Project Details"}
+          </Typography>
+          <IconButton
+            onClick={handleCloseDetailsDialog}
+            sx={{
+              color: "#000",
+            }}
+          >
+            <CloseIcon />
+          </IconButton>
+        </DialogTitle>
+
+        <DialogContent dividers sx={{ py: 3 }}>
+          <Box sx={{ display: "flex", flexDirection: "column", gap: 2.5 }}>
+            {/* Project Name */}
+            <Box>
+              <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
+                {t("dashboard.dialog-details-name") || "Project Name"}
+              </Typography>
+              <Typography variant="body1" sx={{ mt: 0.5, fontWeight: 500 }}>
+                {name}
+              </Typography>
+            </Box>
+
+            {/* Client */}
+            <Box>
+              <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
+                {t("dashboard.dialog-details-client") || "Client"}
+              </Typography>
+              <Typography variant="body1" sx={{ mt: 0.5 }}>
+                {client}
+              </Typography>
+            </Box>
+
+            {/* Status */}
+            <Box>
+              <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
+                {t("dashboard.dialog-details-status") || "Status"}
+              </Typography>
+              <Box sx={{ mt: 0.5 }}>
+                <Label
+                  variant="soft"
+                  color={
+                    (status === "Done" && "success") ||
+                    (status === "In Progress" && "info") ||
+                    (status === "Draft" && "warning") ||
+                    "default"
+                  }
+                >
+                  {t(
+                    `projectlist.table-row.label-status-${status
+                      .toLowerCase()
+                      .replace(/ /g, "-")}`
+                  )}
+                </Label>
+              </Box>
+            </Box>
+
+            {/* Created Date */}
+            {created_at && (
+              <Box>
+                <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
+                  {t("dashboard.dialog-details-created") || "Created"}
+                </Typography>
+                <Typography variant="body1" sx={{ mt: 0.5 }}>
+                  {format(new Date(created_at), "dd MMM yyyy 'at' p")}
+                </Typography>
+              </Box>
+            )}
+
+            {/* Last Updated */}
+            {updated_at && (
+              <Box>
+                <Typography variant="caption" sx={{ color: "text.secondary", fontWeight: 600 }}>
+                  {t("dashboard.dialog-details-updated") || "Last Updated"}
+                </Typography>
+                <Typography variant="body1" sx={{ mt: 0.5 }}>
+                  {format(new Date(updated_at), "dd MMM yyyy 'at' p")}
+                </Typography>
+              </Box>
+            )}
+          </Box>
+        </DialogContent>
+
+        <DialogActions sx={{ px: 3, py: 2 }}>
+          <Button
+            onClick={handleCloseDetailsDialog}
+            variant="contained"
+            sx={{
+              backgroundColor: "#00A5AA",
+              color: "white",
+              textTransform: "none",
+              fontWeight: 600,
+              px: 3,
+              "&:hover": {
+                backgroundColor: "#32B7BB",
+              },
+            }}
+          >
+            {t("dashboard.dialog-details-btn-close") || "Close"}
+          </Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
       <Dialog open={confirm.value} onClose={confirm.onFalse}>
         <IconButton
           onClick={confirm.onFalse}
@@ -225,7 +325,7 @@ export default function InvoiceTableRow({
             position: "absolute",
             top: 8,
             right: 8,
-            color: "#000", // Set the color of the icon
+            color: "#000",
           }}
         >
           <CloseIcon />
@@ -241,7 +341,6 @@ export default function InvoiceTableRow({
             background: "var(--primary-contrast, #FFF)",
           }}
         >
-          {/* SVG placed on top left */}
           <StyledImageContainer>
             <StyledAvatar>
               <svg
@@ -303,19 +402,17 @@ export default function InvoiceTableRow({
           </Typography>
           <br />
 
-          {/* Dialog actions container */}
           <DialogActions
             sx={{
               display: "flex",
-              justifyContent: "space-between", // This ensures the buttons are spaced apart
-              paddingBottom: "16px", // Optional: Adjust this value for spacing between buttons and bottom of dialog
-              paddingRight: "16px", // Optional: Adjust this value for right margin of the buttons
-              paddingLeft: "16px", // Optional: Adjust this value for left margin of the buttons
+              justifyContent: "space-between",
+              paddingBottom: "16px",
+              paddingRight: "16px",
+              paddingLeft: "16px",
             }}
           >
-            {/* Button to cancel the dialog */}
             <Button
-              onClick={handleCloseDialog}
+              onClick={handleCloseDeleteDialog}
               size="small"
               type="submit"
               variant="outlined"
@@ -325,15 +422,15 @@ export default function InvoiceTableRow({
                 fontStyle: "normal",
                 fontWeight: 700,
                 borderRadius: 2,
-                borderColor: "black", // Black border color
-                color: "black", // Black text color
+                borderColor: "black",
+                color: "black",
                 textTransform: "none",
                 width: "auto",
-                padding: "8px 16px", // Adjust padding as needed
+                padding: "8px 16px",
                 "&:hover": {
                   backgroundColor: "transparent",
                   borderColor: "black",
-                  color: "black", // Keep the text color black on hover
+                  color: "black",
                 },
                 boxShadow: "none",
               }}
@@ -341,7 +438,6 @@ export default function InvoiceTableRow({
               {t("dashboard.dialog-delete-btn-cancel")}
             </Button>
 
-            {/* Button to confirm cancellation */}
             <Button
               onClick={onDeleteRow}
               size="small"
@@ -357,7 +453,7 @@ export default function InvoiceTableRow({
                 color: "white",
                 textTransform: "none",
                 width: "auto",
-                padding: "8px 32px", // Adjust padding as needed
+                padding: "8px 32px",
                 "&:hover": {
                   backgroundColor: "#32B7BB",
                   color: "white",

@@ -22,7 +22,7 @@ import { Close as CloseIcon } from "@mui/icons-material";
 import { LoadingButton } from "@mui/lab";
 import { t } from "i18next";
 
-/*const CookieBannerContainer = styled("div")(({ theme }) => ({
+const CookieBannerContainer = styled("div")(({ theme }) => ({
   display: "flex",
   position: "fixed",
   bottom: 20,
@@ -163,7 +163,6 @@ const CookieBanner: React.FC<CookieBannerProps> = ({ onAccept, onReject }) => {
     </CookieBannerContainer>
   );
 };
-*/
 
 const StyledContent = styled("div")(({ theme }) => ({
   minHeight: "100vh",
@@ -214,7 +213,7 @@ const StyledCard = styled(Card)(({ theme }) => ({
 export default function SignupPage() {
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
- /* const [showCookieBanner, setShowCookieBanner] = useState(true);
+ const [showCookieBanner, setShowCookieBanner] = useState(true);
 
   const handleCookieAccept = () => {
     setShowCookieBanner(false);
@@ -227,14 +226,14 @@ export default function SignupPage() {
   const handleTogglePassword = () => {
     setShowPassword(!showPassword);
   };
-  */
+  
 
   return (
     <Box
       display="flex"
       justifyContent="center"
       alignItems="center"
-      bgcolor="#FAFAFA" // Set background color for the entire page
+      bgcolor="#FFFF" // Set background color for the entire page
     >
       <Helmet>
         <title> Sign Up | foodifie </title>
@@ -310,12 +309,12 @@ export default function SignupPage() {
                 )}
               </CardContent>
             </StyledCard>
-            {/*{showCookieBanner && (
+            {showCookieBanner && (
               <CookieBanner
                 onAccept={handleCookieAccept}
                 onReject={handleCookieReject}
               />
-            )}*/}
+            )}
 
             {/* Links to privacy policy, terms and conditions, and imprint */}
             <Box

@@ -71,9 +71,9 @@ const TABLE_HEAD = [
 const BouncyButton = styled(Button)(({ theme }) => ({
   transition: "transform 0.2s ease",
   "&:hover": {
-    transform: "scale(1.05)",
+   
     backgroundColor: "rgba(0, 165, 170, 0.2)", // Add the hover background color
-    border: "2px solid rgba(0, 165, 170, 0.5)", // Change the border color on hover
+ // Change the border color on hover
   },
 }));
 
@@ -206,7 +206,6 @@ export default function InvoiceListView() {
     },
   ] as const;
 
-  
   const handleFilters = useCallback(
     (name: string, value: IInvoiceTableFilterValue) => {
       table.onResetPage();
@@ -383,23 +382,22 @@ export default function InvoiceListView() {
           action={
             <BouncyButton
               variant="outlined"
-             
               style={{
                 borderRadius: 12,
                 color: "#00A5AA",
-             borderColor: "rgba(0, 165, 170, 0.5)", // Initial border color
+                borderColor: "rgba(0, 165, 170, 0.5)", // Initial border color
                 width: "100%",
                 textTransform: "none",
                 boxShadow: "none", // Remove the shadow
               }}
               sx={{
+                color: "#00A5AA",
+                borderColor: "#00A5AA",
                 "&:hover": {
-                  backgroundColor: "#32B7BB !important", // Hover state color
+                  borderColor: "#008B8F",
+                  backgroundColor: "rgba(0, 165, 170, 0.04)",
                 },
-                "&:active, &:focus": {
-                  backgroundColor: "#008B8F !important", // Pressed state color
-                },
-                textTransform: "none",
+                textTransform: "Capitalize",
               }}
             >
               {t("dashboard.btn-project-create")}
